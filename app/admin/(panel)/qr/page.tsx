@@ -11,12 +11,15 @@ import { Button } from "@/components/ui/button";
 
 export const metadata = { title: "QR codes" };
 
+/** Filter value for the general voting-page code (not a restaurant id). */
+const MAIN = "main";
+
 export default function QrPage({ searchParams }: PageProps<"/admin/qr">) {
   return (
     <>
       <PageHeader
         title="QR codes"
-        description="Printable table cards. Each code opens the ballot with the restaurant preselected."
+        description="Printable cards. The main code opens the voting page; restaurant codes open it with that restaurant preselected."
         actions={<PrintButton />}
       />
       <Suspense fallback={<PanelSkeleton />}>
@@ -35,16 +38,22 @@ async function QrSheet({ searchParams }: { searchParams: PageProps<"/admin/qr">[
   const base = siteUrl();
   const isLocal = /localhost|127\.0\.0\.1/.test(base);
 
+  // The main code opens the plain voting page, so visitors never type the address.
+  const targets = [
+    ...(!only || only === MAIN ? [{ id: MAIN, name: "Vote for your favourite", file: "vote", path: "/vote" }] : []),
+    ...restaurants.map((r) => ({ id: r.id, name: r.name, file: r.slug, path: `/vote?restaurant=${r.slug}` })),
+  ];
+
   const cards = await Promise.all(
-    restaurants.map(async (r) => {
-      const url = siteUrl(`/vote?restaurant=${r.slug}`);
+    targets.map(async (t) => {
+      const url = siteUrl(t.path);
       const svg = await QRCode.toString(url, {
         type: "svg",
         errorCorrectionLevel: "Q",
         margin: 0,
         color: { dark: "#30221C", light: "#00000000" },
       });
-      return { ...r, url, svg, dataUri: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}` };
+      return { ...t, url, svg, dataUri: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}` };
     }),
   );
 
@@ -55,7 +64,8 @@ async function QrSheet({ searchParams }: { searchParams: PageProps<"/admin/qr">[
           <label>
             <span className="mb-1.5 block text-xs font-medium text-charcoal/60">Restaurant</span>
             <Select name="restaurant" defaultValue={only ?? ""} className="min-w-56">
-              <option value="">All active restaurants</option>
+              <option value="">Main voting page + all restaurants</option>
+              <option value={MAIN}>Main voting page only</option>
               {all.map((r) => (
                 <option key={r.id} value={r.id}>
                   {r.name}
@@ -113,7 +123,7 @@ async function QrSheet({ searchParams }: { searchParams: PageProps<"/admin/qr">[
             </article>
             <div className="mt-2 flex items-center justify-between gap-2 text-xs print:hidden">
               <span className="truncate font-mono text-charcoal/50">{c.url}</span>
-              <a href={c.dataUri} download={`qr-${c.slug}.svg`} className="shrink-0 font-medium text-green-deep hover:underline">
+              <a href={c.dataUri} download={`qr-${c.file}.svg`} className="shrink-0 font-medium text-green-deep hover:underline">
                 Download SVG
               </a>
             </div>
