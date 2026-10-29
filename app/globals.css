@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   SCIM 2026 — design tokens
+   Ivory carries the page, espresso carries warmth, and the flag
+   colours are reserved for emphasis: a period, a rule, a state.
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  --color-green: #008c45;
+  --color-green-deep: #006b35; /* small text on light grounds (AA) */
+  --color-red: #cd212a;
+  --color-red-deep: #a8161e;
+  --color-ivory: #f8f5ef;
+  --color-ivory-deep: #f1ece2;
+  --color-stone: #eae6de;
+  --color-stone-line: #d9d2c4;
+  --color-espresso: #30221c;
+  --color-espresso-deep: #1e1511;
+  --color-cocoa: #5a4034;
+  --color-charcoal: #202020;
+  --color-gold: #b49a68;
+  --color-gold-soft: #cfbd96;
+
+  --font-display: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-curtain: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --text-display-2xl: clamp(4rem, 13.5vw, 11.5rem);
+  --text-display-xl: clamp(3rem, 8vw, 7.5rem);
+  --text-display-lg: clamp(2.5rem, 5.6vw, 5.25rem);
+  --text-display-md: clamp(2rem, 3.8vw, 3.5rem);
+  --text-display-sm: clamp(1.5rem, 2.4vw, 2.125rem);
+
+  --animate-spin-slow: spin 28s linear infinite;
+  --animate-scroll-cue: scroll-cue 2.4s var(--ease-editorial) infinite;
+}
+
+@keyframes scroll-cue {
+  0% { transform: scaleY(0); transform-origin: top; }
+  45% { transform: scaleY(1); transform-origin: top; }
+  55% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+:root {
+  color-scheme: light;
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-espresso);
+  color: var(--color-ivory);
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Editorial microcopy: small, spaced uppercase labels. */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-wrap: balance;
+    font-optical-sizing: auto;
+  }
+
+  .prose-editorial {
+    font-size: clamp(1.0625rem, 1.15vw, 1.1875rem);
+    line-height: 1.7;
+    text-wrap: pretty;
+  }
+
+  .shell {
+    width: 100%;
+    max-width: 90rem;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* The tricolore hairline — the site's recurring signature. */
+  .tricolore {
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--color-green) 0 33.333%,
+      var(--color-stone) 33.333% 66.666%,
+      var(--color-red) 66.666% 100%
+    );
+  }
+  .tricolore-v {
+    width: 3px;
+    background: linear-gradient(
+      180deg,
+      var(--color-green) 0 33.333%,
+      var(--color-stone) 33.333% 66.666%,
+      var(--color-red) 66.666% 100%
+    );
+  }
+
+  /* Subtle film grain for photographic panels. */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.09;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.5s var(--ease-editorial);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

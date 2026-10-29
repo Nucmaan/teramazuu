@@ -1,0 +1,125 @@
+// Week of Italian Cuisine in the World 2026 — TASTE, CLICK & VOTE
+// Rating range (1–5) is additionally enforced with CHECK constraints in the
+// initial migration, so invalid values are rejected even outside the app.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum TiramisuType {
+  CLASSIC
+  CREATIVE
+}
+
+enum AdminRole {
+  OWNER  // full access, including campaign settings and admin users
+  EDITOR // restaurants, content and votes
+  VIEWER // read-only analytics
+}
+
+model Restaurant {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String   @default("")
+  imageUrl    String?
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  votes       Vote[]
+
+  @@index([isActive, sortOrder])
+}
+
+model Vote {
+  id                 String       @id @default(cuid())
+  restaurantId       String
+  restaurant         Restaurant   @relation(fields: [restaurantId], references: [id], onDelete: Restrict)
+  tiramisuType       TiramisuType
+  presentationRating Int          @db.SmallInt
+  tasteRating        Int          @db.SmallInt
+  overallRating      Int          @db.SmallInt
+  /// Keyed HMAC of an anonymous device cookie. Never a raw identifier.
+  deviceHash         String?
+  /// Keyed HMAC of the client network address. The raw IP is never stored.
+  networkHash        String?
+  /// Votes cast by an authenticated administrator in preview mode.
+  isTest             Boolean      @default(false)
+  createdAt          DateTime     @default(now())
+
+  @@index([restaurantId, createdAt])
+  @@index([createdAt])
+  @@index([deviceHash, restaurantId])
+  @@index([networkHash, createdAt])
+}
+
+model AdminUser {
+  id           String         @id @default(cuid())
+  name         String
+  email        String         @unique
+  passwordHash String
+  role         AdminRole      @default(EDITOR)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  sessions     AdminSession[]
+}
+
+model AdminSession {
+  id          String    @id @default(cuid())
+  /// SHA-256 of the session token; the token itself only lives in the cookie.
+  tokenHash   String    @unique
+  adminUserId String
+  adminUser   AdminUser @relation(fields: [adminUserId], references: [id], onDelete: Cascade)
+  expiresAt   DateTime
+  createdAt   DateTime  @default(now())
+
+  @@index([adminUserId])
+}
+
+model LoginAttempt {
+  id        String   @id @default(cuid())
+  /// HMAC of the attempted email + network, used for throttling only.
+  key       String
+  createdAt DateTime @default(now())
+
+  @@index([key, createdAt])
+}
+
+/// Single-row table (id = 1).
+model CampaignSettings {
+  id            Int      @id @default(1)
+  title         String   @default("Week of Italian Cuisine in the World 2026")
+  /// Stored in UTC; edited and displayed in Africa/Mogadishu time.
+  startDate     DateTime
+  endDate       DateTime
+  votingEnabled Boolean  @default(true)
+  resultsPublic Boolean  @default(false)
+
+  // Editable public copy
+  heroIntro     String   @default("Experience the art of Italian cuisine in Mogadishu. Discover exceptional Tiramisù, celebrate authentic flavors, and vote for your favorite.")
+  offerNote     String   @default("Enjoy a complimentary Tiramisù in any of the participating restaurants, after ordering a main dish, and vote for the best one. Terms & Conditions apply — while stock lasts.")
+
+  // Voting safeguards (0 disables a rule)
+  maxVotesPerDevicePerRestaurant Int     @default(1)
+  maxVotesPerNetworkPerHour      Int     @default(40)
+  requireBotCheck                Boolean @default(true)
+
+  updatedAt DateTime @updatedAt
+}
+
+/// Images uploaded through the admin, stored in Postgres so the app needs no
+/// extra object storage. Intended for a handful of restaurant photos.
+model MediaAsset {
+  id        String   @id @default(cuid())
+  filename  String
+  mimeType  String
+  byteSize  Int
+  data      Bytes
+  createdAt DateTime @default(now())
+}
