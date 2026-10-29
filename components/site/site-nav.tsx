@@ -46,7 +46,7 @@ function VoteButton() {
   return (
     <Link
       href="/vote"
-      className="group relative inline-flex h-11 shrink-0 items-center gap-3 overflow-hidden bg-[#cd212a] pl-5 pr-4 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-white"
+      className="group relative inline-flex h-11 shrink-0 items-center gap-2 overflow-hidden bg-[#cd212a] pl-4 pr-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-white sm:gap-3 sm:pl-5 sm:pr-4 sm:text-[0.75rem] sm:tracking-[0.18em]"
     >
       <span
         aria-hidden

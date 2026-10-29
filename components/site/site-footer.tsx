@@ -45,10 +45,10 @@ export function SiteFooter() {
             </div>
             <nav aria-label="Footer">
               <h2 className="eyebrow text-espresso/50">Navigate</h2>
-              <ul className="mt-5 space-y-2.5">
+              <ul className="mt-4 space-y-0.5">
                 {NAV.map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} className="link-underline text-[0.95rem] text-charcoal/80 hover:text-espresso">
+                    <Link href={l.href} className="link-underline inline-block py-1.5 text-[0.95rem] text-charcoal/80 hover:text-espresso">
                       {l.label}
                     </Link>
                   </li>
