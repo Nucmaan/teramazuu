@@ -15,7 +15,6 @@ import { Turnstile } from "@/components/vote/turnstile";
 import { VoteSuccess } from "@/components/vote/success";
 import { SmartImage } from "@/components/site/smart-image";
 import { cn } from "@/lib/utils";
-import heroImage from "@/public/images/photo/hero-coupe.jpg";
 import classicImage from "@/public/images/photo/classic.jpg";
 import creativeImage from "@/public/images/photo/creative.jpg";
 
@@ -113,51 +112,24 @@ export function VoteExperience({
   const canSubmit = !pending && restaurants.length > 0 && (!needsBotCheck || token.length > 0);
 
   return (
-    <div className="min-h-svh bg-ivory lg:grid lg:grid-cols-12">
-      {/* ── Left: photographic panel ───────────────────────────── */}
-      <aside className="relative isolate overflow-hidden bg-[#cd212a] text-ivory lg:sticky lg:top-0 lg:col-span-5 lg:h-svh">
-        <div aria-hidden className="absolute inset-0 -z-10">
-          <Image
-            src={heroImage}
-            alt=""
-            fill
-            preload
-            placeholder="blur"
-            sizes="(min-width: 1024px) 42vw, 100vw"
-            className="object-cover object-[50%_60%] opacity-70 lg:opacity-80"
-          />
+    <div className="min-h-svh bg-ivory">
+      <header className="bg-[#cd212a] text-white">
+        <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-[var(--gutter)]">
+          <Link href="/" className="font-display text-xl tracking-[-0.01em]">
+            Taste<span className="text-[#c8f5d9]">,</span> Click <span className="italic text-[#c8f5d9]">&amp;</span> Vote
+          </Link>
+          <Link
+            href="/"
+            aria-label="Leave voting and return home"
+            className="-mr-2 grid size-11 place-items-center text-white/80 transition-colors hover:text-white"
+          >
+            <X className="size-5" />
+          </Link>
         </div>
-        <div aria-hidden className="grain absolute inset-0 -z-10" />
-        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-[#8f141b]/80 via-[#cd212a]/55 to-[#8f141b]/90" />
+      </header>
 
-        <div className="flex h-full flex-col justify-between px-[var(--gutter)] pb-8 pt-5 lg:py-10">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="font-display text-xl tracking-[-0.01em] lg:text-2xl">
-              Taste<span className="text-[#c8f5d9]">,</span> Click <span className="italic text-[#c8f5d9]">&amp;</span> Vote
-            </Link>
-            <Link
-              href="/"
-              aria-label="Leave voting and return home"
-              className="-mr-2 grid size-11 place-items-center text-ivory/80 transition-colors hover:text-ivory"
-            >
-              <X className="size-5" />
-            </Link>
-          </div>
-
-          <div className="mt-10 lg:mt-0">
-            <p className="eyebrow flex items-center gap-3 text-ivory/70">
-              <span aria-hidden className="tricolore inline-block h-[2px] w-8" />
-              #SCIM2026 · Mogadishu
-            </p>
-            <p className="display mt-5 max-w-[14ch] text-[clamp(2rem,3.6vw,3.75rem)] leading-[1.02] lg:mt-8">
-              {done ? "Grazie. Your taste has spoken." : "Every great Tiramisù begins at a table."}
-            </p>
-          </div>
-        </div>
-      </aside>
-
-      {/* ── Right: the ballot, all on one page ───────────────────── */}
-      <section className="relative lg:col-span-7" aria-label="Vote">
+      {/* ── The ballot, all on one page ───────────────────────────── */}
+      <section className="relative mx-auto max-w-3xl" aria-label="Vote">
         {preview && (
           <div className="bg-gold/20 px-[var(--gutter)] py-3 text-sm text-espresso" role="status">
             <strong className="font-semibold">Preview mode.</strong> You&rsquo;re signed in as an administrator — votes
@@ -172,7 +144,7 @@ export function VoteExperience({
               initial={{ opacity: 0, y: reduce ? 0 : 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, ease }}
-              className="px-[var(--gutter)] py-14 lg:px-[clamp(3rem,6vw,7rem)] lg:py-20"
+              className="px-[var(--gutter)] py-14 lg:py-20"
             >
               <VoteSuccess restaurantName={restaurant?.name} test={result.test} />
             </motion.div>
@@ -182,7 +154,7 @@ export function VoteExperience({
               noValidate
               onSubmit={(e) => void handleSubmit(onValid, onInvalid)(e)}
               exit={{ opacity: 0 }}
-              className="px-[var(--gutter)] pb-36 pt-10 sm:pt-14 lg:px-[clamp(3rem,6vw,7rem)] lg:pb-16 lg:pt-20"
+              className="px-[var(--gutter)] pb-36 pt-10 sm:pt-14 lg:pb-16 lg:pt-16"
             >
               {/* Honeypot: hidden from people and assistive tech */}
               <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">

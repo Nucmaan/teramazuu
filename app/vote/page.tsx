@@ -52,9 +52,9 @@ async function VoteGate({ searchParams }: { searchParams: PageProps<"/vote">["se
 
 function VoteSkeleton() {
   return (
-    <div className="min-h-svh bg-ivory lg:grid lg:grid-cols-12" aria-busy="true" aria-label="Loading the ballot">
-      <div className="h-56 bg-espresso-deep lg:col-span-5 lg:h-svh" />
-      <div className="space-y-6 px-[var(--gutter)] py-14 lg:col-span-7 lg:px-[clamp(3rem,6vw,7rem)] lg:pt-20">
+    <div className="min-h-svh bg-ivory" aria-busy="true" aria-label="Loading the ballot">
+      <div className="h-16 bg-[#cd212a]" />
+      <div className="mx-auto max-w-3xl space-y-6 px-[var(--gutter)] py-14 lg:pt-16">
         <div className="h-3 w-24 animate-pulse bg-stone" />
         <div className="h-14 w-4/5 animate-pulse bg-stone" />
         <div className="grid gap-3 pt-6 sm:grid-cols-2">

@@ -1,38 +1,23 @@
-import Image from "next/image";
 import Link from "next/link";
 import { X } from "lucide-react";
 import { Cta } from "@/components/site/cta";
-import heroImage from "@/public/images/photo/hero-coupe.jpg";
 
 /** Shown only while an administrator has paused voting. */
 export function VotingState() {
   return (
-    <div className="min-h-svh bg-ivory lg:grid lg:grid-cols-12">
-      <aside className="relative isolate h-[34svh] overflow-hidden bg-[#cd212a] lg:sticky lg:top-0 lg:col-span-5 lg:h-svh">
-        <div aria-hidden className="absolute inset-0 -z-10">
-          <Image
-          src={heroImage}
-          alt=""
-          fill
-          preload
-          placeholder="blur"
-          sizes="(min-width: 1024px) 42vw, 100vw"
-          className="object-cover object-[50%_60%] opacity-80"
-        />
-        </div>
-        <div aria-hidden className="grain absolute inset-0" />
-        <div aria-hidden className="absolute inset-0 bg-[#cd212a]/55" />
-        <div className="relative flex items-center justify-between px-[var(--gutter)] pt-5 text-ivory lg:pt-10">
-          <Link href="/" className="font-display text-xl lg:text-2xl">
+    <div className="min-h-svh bg-ivory">
+      <header className="bg-[#cd212a] text-white">
+        <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-[var(--gutter)]">
+          <Link href="/" className="font-display text-xl tracking-[-0.01em]">
             Taste<span className="text-[#c8f5d9]">,</span> Click <span className="italic text-[#c8f5d9]">&amp;</span> Vote
           </Link>
-          <Link href="/" aria-label="Return home" className="-mr-2 grid size-11 place-items-center text-ivory/80 hover:text-ivory">
+          <Link href="/" aria-label="Return home" className="-mr-2 grid size-11 place-items-center text-white/80 hover:text-white">
             <X className="size-5" />
           </Link>
         </div>
-      </aside>
+      </header>
 
-      <section className="flex flex-col justify-center px-[var(--gutter)] py-14 lg:col-span-7 lg:min-h-svh lg:px-[clamp(3rem,6vw,7rem)]">
+      <section className="mx-auto max-w-3xl px-[var(--gutter)] py-16 lg:py-24">
         <p className="eyebrow flex items-center gap-3 text-espresso/60">
           <span aria-hidden className="tricolore inline-block h-[2px] w-8" />
           A short pause
