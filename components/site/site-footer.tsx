@@ -15,7 +15,7 @@ const TAGS = ["#SCIM2026", "#cucinaitaliana", "#DiplomaziadellaCrescita"];
 
 export function SiteFooter() {
   return (
-    <footer className="relative bg-ivory text-espresso">
+    <footer className="ground-green relative">
       <div className="shell pb-10 pt-24 lg:pt-32">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-8">
           <div className="flex items-start gap-6 lg:col-span-6">
@@ -23,7 +23,7 @@ export function SiteFooter() {
               src={forkSpoon}
               alt="Week of the Italian Cuisine in the World — campaign graphic"
               sizes="120px"
-              className="h-auto w-20 shrink-0 mix-blend-multiply sm:w-28"
+              className="h-auto w-20 shrink-0 bg-white p-2 sm:w-28"
             />
             <p className="display text-[clamp(2.25rem,4.4vw,4rem)] leading-[0.98] text-espresso">
               Week of Italian Cuisine <span className="italic text-espresso/55">in the World</span>{" "}
@@ -83,9 +83,9 @@ export function SiteFooter() {
       </div>
       {/* Poster-style tricolore base */}
       <div aria-hidden className="grid h-2 grid-cols-[1fr_1fr_1fr] gap-0">
-        <span className="bg-green" />
-        <span className="bg-stone" />
-        <span className="bg-red" />
+        <span className="bg-[#008c45]" />
+        <span className="bg-white" />
+        <span className="bg-[#cd212a]" />
       </div>
     </footer>
   );

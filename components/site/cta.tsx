@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 type Variant = "green" | "espresso" | "ivory" | "outline-light" | "outline-dark";
 
 const variants: Record<Variant, { base: string; fill: string }> = {
-  green: { base: "bg-green text-ivory", fill: "bg-red" },
+  green: { base: "bg-green text-ivory", fill: "bg-espresso-deep" },
   espresso: { base: "bg-espresso text-ivory", fill: "bg-red" },
   ivory: { base: "bg-ivory text-espresso", fill: "bg-red" },
   "outline-light": { base: "border border-ivory/40 text-ivory", fill: "bg-ivory" },

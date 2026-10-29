@@ -32,7 +32,7 @@ export function HowItWorks() {
     <section
       id="experience"
       aria-labelledby="how-title"
-      className="relative overflow-hidden bg-espresso-deep py-24 text-ivory sm:py-32 lg:py-40"
+      className="ground-red relative overflow-hidden py-24 sm:py-32 lg:py-40"
     >
       <div className="shell">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
@@ -94,7 +94,7 @@ export function HowItWorks() {
 
         <Reveal className="mt-20 flex flex-col items-start gap-6 border-t border-ivory/15 pt-10 sm:flex-row sm:items-center sm:justify-between lg:mt-28">
           <p className="font-display text-xl italic text-ivory/80 sm:text-2xl">Ready when you are.</p>
-          <Cta href="/vote" variant="ivory">
+          <Cta href="/vote">
             Start voting
           </Cta>
         </Reveal>

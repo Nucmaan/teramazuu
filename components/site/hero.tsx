@@ -23,7 +23,7 @@ export function Hero({ intro }: { intro: string }) {
   const t = (d: number) => (reduce ? 0 : CURTAIN + d);
 
   return (
-    <section ref={ref} aria-labelledby="hero-title" className="relative isolate overflow-hidden bg-ivory">
+    <section ref={ref} aria-labelledby="hero-title" className="ground-green relative isolate overflow-hidden">
       {/* Opening curtain */}
       {!reduce && (
         <motion.div
@@ -160,7 +160,7 @@ export function Hero({ intro }: { intro: string }) {
               className="size-36 shadow-[0_1px_0_rgba(0,89,44,0.06)] xl:size-40"
               text="Week of Italian Cuisine · #SCIM2026 · "
               center={
-                <span className="flex flex-col items-center leading-none text-espresso">
+                <span className="flex flex-col items-center leading-none text-[#00592c]">
                   <span className="font-display text-[2rem] italic">26</span>
                   <span aria-hidden className="tricolore mt-1.5 block h-[2px] w-7" />
                 </span>

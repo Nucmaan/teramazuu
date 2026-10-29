@@ -14,8 +14,8 @@ const LAYERS = ["Savoiardi", "Espresso", "Mascarpone", "Cocoa"];
 
 export function History() {
   return (
-    <section aria-labelledby="history-title" className="relative overflow-hidden bg-ivory-deep pb-24 pt-20 sm:pb-32 lg:pb-44 lg:pt-28">
-      <DriftWord className="display select-none text-[clamp(6rem,24vw,22rem)] uppercase leading-[0.8] tracking-[-0.04em] text-transparent [-webkit-text-stroke:1px_rgba(0,89,44,0.28)]">
+    <section aria-labelledby="history-title" className="ground-green relative overflow-hidden pb-24 pt-20 sm:pb-32 lg:pb-44 lg:pt-28">
+      <DriftWord className="display select-none text-[clamp(6rem,24vw,22rem)] uppercase leading-[0.8] tracking-[-0.04em] text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.35)]">
         Tiramisù · Tiramisù
       </DriftWord>
 

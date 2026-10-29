@@ -151,7 +151,7 @@ export function VoteExperience({
   return (
     <div className="min-h-svh bg-ivory lg:grid lg:grid-cols-12">
       {/* ── Left: photographic panel ───────────────────────────── */}
-      <aside className="relative isolate overflow-hidden bg-espresso-deep text-ivory lg:sticky lg:top-0 lg:col-span-5 lg:h-svh">
+      <aside className="relative isolate overflow-hidden bg-[#cd212a] text-ivory lg:sticky lg:top-0 lg:col-span-5 lg:h-svh">
         <div aria-hidden className="absolute inset-0 -z-10">
           <Image
           src={heroImage}
@@ -164,12 +164,12 @@ export function VoteExperience({
         />
         </div>
         <div aria-hidden className="grain absolute inset-0 -z-10" />
-        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-espresso-deep/70 via-espresso-deep/25 to-espresso-deep/90" />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-[#8f141b]/80 via-[#cd212a]/55 to-[#8f141b]/90" />
 
         <div className="flex h-full flex-col justify-between px-[var(--gutter)] pb-6 pt-5 lg:py-10">
           <div className="flex items-center justify-between">
             <Link href="/" className="font-display text-xl tracking-[-0.01em] lg:text-2xl">
-              Taste<span className="text-green">,</span> Click <span className="italic text-red">&amp;</span> Vote
+              Taste<span className="text-[#c8f5d9]">,</span> Click <span className="italic text-[#c8f5d9]">&amp;</span> Vote
             </Link>
             <Link
               href="/"
@@ -216,7 +216,7 @@ export function VoteExperience({
                   </span>
                   <motion.span
                     aria-hidden
-                    className={cn("absolute inset-0 origin-left", i === 0 ? "bg-green" : i === 3 ? "bg-red" : "bg-ivory")}
+                    className={cn("absolute inset-0 origin-left", i === 0 ? "bg-green" : i === 3 ? "bg-white" : "bg-ivory")}
                     initial={false}
                     animate={{ scaleX: i <= step ? 1 : 0 }}
                     transition={{ duration: 0.7, ease }}

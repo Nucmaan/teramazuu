@@ -8,7 +8,7 @@ import heroImage from "@/public/images/photo/hero-coupe.jpg";
 export function VotingState() {
   return (
     <div className="min-h-svh bg-ivory lg:grid lg:grid-cols-12">
-      <aside className="relative isolate h-[34svh] overflow-hidden bg-espresso-deep lg:sticky lg:top-0 lg:col-span-5 lg:h-svh">
+      <aside className="relative isolate h-[34svh] overflow-hidden bg-[#cd212a] lg:sticky lg:top-0 lg:col-span-5 lg:h-svh">
         <div aria-hidden className="absolute inset-0 -z-10">
           <Image
           src={heroImage}
@@ -21,9 +21,10 @@ export function VotingState() {
         />
         </div>
         <div aria-hidden className="grain absolute inset-0" />
+        <div aria-hidden className="absolute inset-0 bg-[#cd212a]/55" />
         <div className="relative flex items-center justify-between px-[var(--gutter)] pt-5 text-ivory lg:pt-10">
           <Link href="/" className="font-display text-xl lg:text-2xl">
-            Taste<span className="text-green">,</span> Click <span className="italic text-red">&amp;</span> Vote
+            Taste<span className="text-[#c8f5d9]">,</span> Click <span className="italic text-[#c8f5d9]">&amp;</span> Vote
           </Link>
           <Link href="/" aria-label="Return home" className="-mr-2 grid size-11 place-items-center text-ivory/80 hover:text-ivory">
             <X className="size-5" />

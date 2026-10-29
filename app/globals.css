@@ -2,8 +2,9 @@
 
 /* ─────────────────────────────────────────────────────────────
    SCIM 2026 — design tokens
-   Green and red carry the page: the deep tones are Italian green,
-   the accents are red, and the light grounds are tinted to match.
+   Green and red carry the page: sections sit on solid green or red
+   grounds (see .ground-green / .ground-red), deep tones are Italian
+   green, and accents are red.
    (Token names are kept from the original palette.)
    ───────────────────────────────────────────────────────────── */
 @theme {
@@ -117,19 +118,62 @@ body {
     height: 3px;
     background: linear-gradient(
       90deg,
-      var(--color-green) 0 33.333%,
+      #008c45 0 33.333%,
       #ffffff 33.333% 66.666%,
-      var(--color-red) 66.666% 100%
+      #cd212a 66.666% 100%
     );
   }
   .tricolore-v {
     width: 3px;
     background: linear-gradient(
       180deg,
-      var(--color-green) 0 33.333%,
+      #008c45 0 33.333%,
       #ffffff 33.333% 66.666%,
-      var(--color-red) 66.666% 100%
+      #cd212a 66.666% 100%
     );
+  }
+
+  /* Solid flag-colour grounds. Each one re-points the palette for everything
+     inside it: the dark tokens turn white, and the accents switch to a colour
+     that still reads on the ground (red on green, green on red). */
+  .tone-green,
+  .ground-green {
+    --color-espresso: #ffffff;
+    --color-espresso-deep: #00592c;
+    --color-charcoal: #ffffff;
+    --color-cocoa: #ffd1d3;
+    --color-ivory: #ffffff;
+    --color-ivory-deep: #ffffff;
+    --color-stone: #00592c;
+    --color-stone-line: rgb(255 255 255 / 0.3);
+    --color-green: #cd212a;
+    --color-green-deep: #ffffff;
+    --color-red: #ffd1d3;
+    --color-red-deep: #ffffff;
+    --color-gold: #ffd1d3;
+    --color-gold-soft: #ffd1d3;
+  }
+  .ground-green {
+    background-color: #008c45;
+    color: #ffffff;
+  }
+  .ground-red {
+    --color-espresso: #ffffff;
+    --color-espresso-deep: #8f141b;
+    --color-charcoal: #ffffff;
+    --color-cocoa: #c8f5d9;
+    --color-ivory: #ffffff;
+    --color-ivory-deep: #ffffff;
+    --color-stone: #a8161e;
+    --color-stone-line: rgb(255 255 255 / 0.3);
+    --color-green: #008c45;
+    --color-green-deep: #c8f5d9;
+    --color-red: #c8f5d9;
+    --color-red-deep: #ffffff;
+    --color-gold: #c8f5d9;
+    --color-gold-soft: #c8f5d9;
+    background-color: #cd212a;
+    color: #ffffff;
   }
 
   /* Subtle film grain for photographic panels. */

@@ -5,7 +5,7 @@ import ctaImage from "@/public/images/photo/cta-dark.jpg";
 
 export function VoteCta() {
   return (
-    <section aria-labelledby="cta-title" className="relative isolate overflow-hidden bg-espresso-deep text-ivory">
+    <section aria-labelledby="cta-title" className="ground-red relative isolate overflow-hidden">
       <Image
         src={ctaImage}
         alt=""
@@ -17,7 +17,7 @@ export function VoteCta() {
       <div aria-hidden className="grain absolute inset-0 -z-10" />
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(0,61,30,0.94)_0%,rgba(0,61,30,0.78)_42%,rgba(0,61,30,0.15)_100%)]"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(205,33,42,0.96)_0%,rgba(205,33,42,0.82)_42%,rgba(205,33,42,0.2)_100%)]"
       />
 
       <div className="shell flex min-h-[44rem] flex-col justify-center py-28 lg:min-h-[52rem]">

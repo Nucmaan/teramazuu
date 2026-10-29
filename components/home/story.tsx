@@ -6,7 +6,7 @@ import poster from "@/public/images/terama.png";
 
 export function Story() {
   return (
-    <section id="about" aria-labelledby="story-title" className="relative bg-ivory py-24 sm:py-32 lg:py-44">
+    <section id="about" aria-labelledby="story-title" className="ground-red relative py-24 sm:py-32 lg:py-44">
       <div className="shell grid grid-cols-1 gap-y-16 lg:grid-cols-12 lg:gap-x-8">
         <div className="lg:col-span-7">
           <SectionIndex n="01">A celebration of Italian culture</SectionIndex>

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 export function Restaurants({ restaurants }: { restaurants: PublicRestaurant[] }) {
   return (
-    <section id="restaurants" aria-labelledby="restaurants-title" className="relative bg-ivory py-24 sm:py-32 lg:py-44">
+    <section id="restaurants" aria-labelledby="restaurants-title" className="ground-green relative py-24 sm:py-32 lg:py-44">
       <div className="shell">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
@@ -72,7 +72,7 @@ function RestaurantCard({ restaurant: r, index }: { restaurant: PublicRestaurant
             className="object-cover object-[50%_78%] transition-transform duration-[1.6s] ease-[var(--ease-editorial)] group-hover:scale-[1.06]"
           />
         ) : (
-          <div className="absolute inset-0 grid place-items-center bg-espresso">
+          <div className="absolute inset-0 grid place-items-center bg-espresso-deep">
             <span className="font-display text-7xl italic text-ivory/20">{r.name.charAt(0)}</span>
           </div>
         )}
