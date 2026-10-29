@@ -56,7 +56,7 @@ export function SettingsForm({ values, editable, botConfigured }: { values: Sett
             <ToggleRow
               name="requireBotCheck"
               label="Bot protection (Turnstile)"
-              hint={botConfigured ? "Cloudflare Turnstile keys are configured." : "Keys are missing — production voting will refuse submissions until they are set."}
+              hint={botConfigured ? "Cloudflare Turnstile keys are configured." : "No Turnstile keys are set, so this check is skipped. Voting still works, protected by the device and network limits."}
               defaultChecked={values.requireBotCheck}
             />
           </div>

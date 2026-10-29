@@ -41,15 +41,11 @@ export async function submitVote(raw: unknown, options: { preview?: boolean } = 
 
     const address = await getClientAddress();
 
-    if (settings.requireBotCheck && !isTest) {
-      if (botCheckConfigured()) {
-        if (!(await verifyTurnstile(turnstileToken, address))) {
-          return { ok: false, code: "bot", message: "We couldn't confirm you're human. Please complete the check and try again." };
-        }
-      } else if (process.env.NODE_ENV === "production") {
-        // Fail closed: production must not silently run without bot protection.
-        console.error("Bot check required but TURNSTILE keys are not configured.");
-        return { ok: false, code: "error", message: "Voting is temporarily unavailable. Please try again later." };
+    // Turnstile is optional: without keys, the honeypot and the device/network
+    // limits below are the safeguards.
+    if (settings.requireBotCheck && !isTest && botCheckConfigured()) {
+      if (!(await verifyTurnstile(turnstileToken, address))) {
+        return { ok: false, code: "bot", message: "We couldn't confirm you're human. Please complete the check and try again." };
       }
     }
 
