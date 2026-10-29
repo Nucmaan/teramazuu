@@ -101,7 +101,7 @@ function VoteButton() {
     >
       <span
         aria-hidden
-        className="absolute inset-0 origin-bottom scale-y-0 bg-green transition-transform duration-500 ease-[var(--ease-editorial)] group-hover:scale-y-100"
+        className="absolute inset-0 origin-bottom scale-y-0 bg-red transition-transform duration-500 ease-[var(--ease-editorial)] group-hover:scale-y-100"
       />
       <span className="relative">Vote Now</span>
       <ArrowUpRight

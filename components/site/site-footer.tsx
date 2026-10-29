@@ -9,7 +9,6 @@ const NAV = [
   { href: "/#restaurants", label: "Restaurants" },
   { href: "/#about", label: "About" },
   { href: "/vote", label: "Vote Now" },
-  { href: "/results", label: "Results" },
 ];
 
 const TAGS = ["#SCIM2026", "#cucinaitaliana", "#DiplomaziadellaCrescita"];
@@ -79,18 +78,7 @@ export function SiteFooter() {
 
         <div className="mt-20 flex flex-col gap-4 border-t border-espresso/15 pt-8 text-[0.8125rem] text-charcoal/60 sm:flex-row sm:items-center sm:justify-between lg:mt-28">
           <p>Taste, Click &amp; Vote · Week of Italian Cuisine in the World 2026</p>
-          <ul className="flex gap-6">
-            <li>
-              <Link href="/privacy" className="link-underline hover:text-espresso">
-                Privacy Policy
-              </Link>
-            </li>
-            <li>
-              <Link href="/terms" className="link-underline hover:text-espresso">
-                Terms &amp; Conditions
-              </Link>
-            </li>
-          </ul>
+          <p>Embassy of Italy in Mogadishu</p>
         </div>
       </div>
       {/* Poster-style tricolore base */}

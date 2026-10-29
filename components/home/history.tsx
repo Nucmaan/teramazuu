@@ -15,13 +15,13 @@ const LAYERS = ["Savoiardi", "Espresso", "Mascarpone", "Cocoa"];
 export function History() {
   return (
     <section aria-labelledby="history-title" className="relative overflow-hidden bg-ivory-deep pb-24 pt-20 sm:pb-32 lg:pb-44 lg:pt-28">
-      <DriftWord className="display select-none text-[clamp(6rem,24vw,22rem)] uppercase leading-[0.8] tracking-[-0.04em] text-transparent [-webkit-text-stroke:1px_rgba(48,34,28,0.28)]">
+      <DriftWord className="display select-none text-[clamp(6rem,24vw,22rem)] uppercase leading-[0.8] tracking-[-0.04em] text-transparent [-webkit-text-stroke:1px_rgba(0,89,44,0.28)]">
         Tiramisù · Tiramisù
       </DriftWord>
 
       <div className="shell relative -mt-[clamp(2rem,7vw,7rem)] grid grid-cols-1 gap-y-14 lg:grid-cols-12 lg:gap-x-8">
         <div className="relative lg:col-span-5">
-          <ImageReveal className="aspect-[3/4] bg-stone shadow-[0_40px_80px_-40px_rgba(30,21,17,0.5)]">
+          <ImageReveal className="aspect-[3/4] bg-stone shadow-[0_40px_80px_-40px_rgba(0,61,30,0.5)]">
             <Image
               src={historyImage}
               alt="A dish of Tiramisù being cut, its cocoa surface scattered beside savoiardi biscuits"

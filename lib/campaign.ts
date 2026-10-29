@@ -58,41 +58,9 @@ export async function getActiveRestaurants(): Promise<PublicRestaurant[]> {
   });
 }
 
-export type VotingStatus = "upcoming" | "open" | "closed" | "paused";
+export type VotingStatus = "open" | "paused";
 
-export function getVotingStatus(
-  settings: Pick<CampaignSettingsData, "startDate" | "endDate" | "votingEnabled">,
-  now: Date,
-): VotingStatus {
-  if (now < settings.startDate) return "upcoming";
-  if (now > settings.endDate) return "closed";
-  if (!settings.votingEnabled) return "paused";
-  return "open";
-}
-
-/** Public leaderboard — only rendered when resultsPublic is enabled. */
-export async function getPublicResults() {
-  "use cache";
-  cacheTag(TAGS.results);
-  cacheLife("minutes");
-  const [restaurants, grouped] = await Promise.all([
-    db.restaurant.findMany({ select: { id: true, name: true, slug: true, imageUrl: true } }),
-    db.vote.groupBy({
-      by: ["restaurantId"],
-      where: { isTest: false },
-      _count: { _all: true },
-      _avg: { presentationRating: true, tasteRating: true, overallRating: true },
-    }),
-  ]);
-  const byId = new Map(restaurants.map((r) => [r.id, r]));
-  return grouped
-    .map((g) => ({
-      restaurant: byId.get(g.restaurantId)!,
-      votes: g._count._all,
-      presentation: g._avg.presentationRating ?? 0,
-      taste: g._avg.tasteRating ?? 0,
-      overall: g._avg.overallRating ?? 0,
-    }))
-    .filter((r) => r.restaurant)
-    .sort((a, b) => b.overall - a.overall || b.votes - a.votes);
+/** Voting is open straight away — there is no start or end time, only the admin pause switch. */
+export function getVotingStatus(settings: Pick<CampaignSettingsData, "votingEnabled">): VotingStatus {
+  return settings.votingEnabled ? "open" : "paused";
 }

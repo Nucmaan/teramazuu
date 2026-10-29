@@ -399,11 +399,7 @@ export function VoteExperience({
                           </div>
                         )}
                         <p className="mt-6 text-[0.8125rem] leading-relaxed text-charcoal/55">
-                          Your vote is anonymous. We don&rsquo;t ask for your name, phone or email. See our{" "}
-                          <Link href="/privacy" className="underline underline-offset-2 hover:text-espresso">
-                            privacy notice
-                          </Link>
-                          .
+                          Your vote is anonymous. We don&rsquo;t ask for your name, phone or email.
                         </p>
                       </div>
                     )}
@@ -455,7 +451,7 @@ export function VoteExperience({
                     aria-hidden
                     className={cn(
                       "absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[var(--ease-editorial)] group-enabled:group-hover:scale-x-100",
-                      step === 3 ? "bg-espresso-deep" : "bg-green",
+                      "bg-red",
                     )}
                   />
                   <span className="relative">{pending ? "Submitting…" : step === 3 ? "Submit my vote" : "Continue"}</span>

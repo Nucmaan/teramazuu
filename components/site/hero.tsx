@@ -157,7 +157,7 @@ export function Hero({ intro }: { intro: string }) {
           >
             <Seal
               id="hero-seal"
-              className="size-36 shadow-[0_1px_0_rgba(48,34,28,0.06)] xl:size-40"
+              className="size-36 shadow-[0_1px_0_rgba(0,89,44,0.06)] xl:size-40"
               text="Week of Italian Cuisine · #SCIM2026 · "
               center={
                 <span className="flex flex-col items-center leading-none text-espresso">

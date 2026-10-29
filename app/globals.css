@@ -2,24 +2,25 @@
 
 /* ─────────────────────────────────────────────────────────────
    SCIM 2026 — design tokens
-   Ivory carries the page, espresso carries warmth, and the flag
-   colours are reserved for emphasis: a period, a rule, a state.
+   Green and red carry the page: the deep tones are Italian green,
+   the accents are red, and the light grounds are tinted to match.
+   (Token names are kept from the original palette.)
    ───────────────────────────────────────────────────────────── */
 @theme {
   --color-green: #008c45;
   --color-green-deep: #006b35; /* small text on light grounds (AA) */
   --color-red: #cd212a;
   --color-red-deep: #a8161e;
-  --color-ivory: #f8f5ef;
-  --color-ivory-deep: #f1ece2;
-  --color-stone: #eae6de;
-  --color-stone-line: #d9d2c4;
-  --color-espresso: #30221c;
-  --color-espresso-deep: #1e1511;
-  --color-cocoa: #5a4034;
-  --color-charcoal: #202020;
-  --color-gold: #b49a68;
-  --color-gold-soft: #cfbd96;
+  --color-ivory: #f2f8f4;
+  --color-ivory-deep: #fbe9ea;
+  --color-stone: #dcece2;
+  --color-stone-line: #bcd8c6;
+  --color-espresso: #00592c;
+  --color-espresso-deep: #003d1e;
+  --color-cocoa: #b81d26;
+  --color-charcoal: #12261a;
+  --color-gold: #e2454d;
+  --color-gold-soft: #f2959a;
 
   --font-display: var(--font-playfair), "Playfair Display", Georgia, serif;
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
@@ -117,7 +118,7 @@ body {
     background: linear-gradient(
       90deg,
       var(--color-green) 0 33.333%,
-      var(--color-stone) 33.333% 66.666%,
+      #ffffff 33.333% 66.666%,
       var(--color-red) 66.666% 100%
     );
   }
@@ -126,7 +127,7 @@ body {
     background: linear-gradient(
       180deg,
       var(--color-green) 0 33.333%,
-      var(--color-stone) 33.333% 66.666%,
+      #ffffff 33.333% 66.666%,
       var(--color-red) 66.666% 100%
     );
   }

@@ -36,12 +36,8 @@ function ToggleRow({ name, label, hint, defaultChecked }: { name: string; label:
 
 export type SettingsValues = {
   title: string;
-  startLocal: string;
-  endLocal: string;
   votingEnabled: boolean;
-  resultsPublic: boolean;
   heroIntro: string;
-  offerNote: string;
   maxVotesPerDevicePerRestaurant: number;
   maxVotesPerNetworkPerHour: number;
   requireBotCheck: boolean;
@@ -54,18 +50,9 @@ export function SettingsForm({ values, editable, botConfigured }: { values: Sett
     <form action={action}>
       <fieldset disabled={!editable} className="grid gap-8 xl:grid-cols-2">
         <section className="space-y-5">
-          <h3 className="text-xs font-semibold uppercase tracking-[0.12em] text-charcoal/55">Voting window · Africa/Mogadishu</h3>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Opens" htmlFor="startDate" error={e.startDate}>
-              <Input id="startDate" name="startDate" type="datetime-local" defaultValue={values.startLocal} required />
-            </Field>
-            <Field label="Closes" htmlFor="endDate" error={e.endDate}>
-              <Input id="endDate" name="endDate" type="datetime-local" defaultValue={values.endLocal} required />
-            </Field>
-          </div>
+          <h3 className="text-xs font-semibold uppercase tracking-[0.12em] text-charcoal/55">Voting</h3>
           <div className="rounded-[3px] border border-stone px-4">
-            <ToggleRow name="votingEnabled" label="Voting enabled" hint="Pause or resume voting inside the window." defaultChecked={values.votingEnabled} />
-            <ToggleRow name="resultsPublic" label="Public results" hint="Publish the leaderboard at /results." defaultChecked={values.resultsPublic} />
+            <ToggleRow name="votingEnabled" label="Voting enabled" hint="Voting is open while this is on. Turn it off to pause." defaultChecked={values.votingEnabled} />
             <ToggleRow
               name="requireBotCheck"
               label="Bot protection (Turnstile)"
@@ -106,9 +93,6 @@ export function SettingsForm({ values, editable, botConfigured }: { values: Sett
           </Field>
           <Field label="Homepage introduction" htmlFor="heroIntro" error={e.heroIntro} hint="Supporting text under TASTE. CLICK. VOTE.">
             <Textarea id="heroIntro" name="heroIntro" defaultValue={values.heroIntro} rows={3} maxLength={400} />
-          </Field>
-          <Field label="Offer & terms note" htmlFor="offerNote" error={e.offerNote} hint="Shown on the Terms page. Use wording approved by the Embassy.">
-            <Textarea id="offerNote" name="offerNote" defaultValue={values.offerNote} rows={4} maxLength={600} />
           </Field>
         </section>
       </fieldset>

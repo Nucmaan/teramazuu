@@ -4,7 +4,6 @@ import { connection } from "next/server";
 import { requireAdmin } from "@/lib/auth";
 import { getCampaignSettings, getVotingStatus } from "@/lib/campaign";
 import { getOverview, getRestaurantStats, getVotesOverTime } from "@/lib/admin-data";
-import { formatCampaignDateTime } from "@/lib/time";
 import { PageBody, PageHeader, PanelSkeleton } from "@/components/admin/page-header";
 import { Badge, Card, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -49,13 +48,11 @@ async function Overview() {
     getRestaurantStats(),
     getVotesOverTime(settings.startDate, settings.endDate),
   ]);
-  const status = getVotingStatus(settings, new Date());
+  const status = getVotingStatus(settings);
   const typeTotal = o.classic + o.creative;
 
   const statusBadge = {
     open: <Badge tone="green">Voting open</Badge>,
-    upcoming: <Badge tone="gold">Opens {formatCampaignDateTime(settings.startDate)}</Badge>,
-    closed: <Badge tone="red">Voting closed</Badge>,
     paused: <Badge tone="red">Voting paused</Badge>,
   }[status];
 
@@ -63,7 +60,6 @@ async function Overview() {
     <PageBody>
       <div className="flex flex-wrap items-center gap-3 text-sm text-charcoal/60">
         {statusBadge}
-        <span>Mogadishu time · closes {formatCampaignDateTime(settings.endDate)}</span>
         {o.tests > 0 && <span>· {o.tests} test vote{o.tests === 1 ? "" : "s"} hidden</span>}
       </div>
 

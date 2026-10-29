@@ -3,7 +3,6 @@ import { db } from "@/lib/db";
 import { isOwner, requireAdmin } from "@/lib/auth";
 import { getCampaignSettings } from "@/lib/campaign";
 import { botCheckConfigured } from "@/lib/security";
-import { toCampaignLocalInput } from "@/lib/time";
 import { PageBody, PageHeader, PanelSkeleton } from "@/components/admin/page-header";
 import { NewAdminForm, PasswordForm, RemoveAdminButton, SettingsForm } from "@/components/admin/settings-forms";
 import { Badge, Card, CardHeader } from "@/components/ui/card";
@@ -13,7 +12,7 @@ export const metadata = { title: "Settings" };
 export default function SettingsPage() {
   return (
     <>
-      <PageHeader title="Settings" description="Voting window, rules, campaign content and administrators." />
+      <PageHeader title="Settings" description="Voting, rules, campaign content and administrators." />
       <Suspense fallback={<PanelSkeleton />}>
         <Settings />
       </Suspense>
@@ -34,19 +33,15 @@ async function Settings() {
   return (
     <PageBody>
       <Card>
-        <CardHeader title="Campaign" description="Times are entered and shown in Africa/Mogadishu (UTC+3)." />
+        <CardHeader title="Campaign" description="Voting is open straight away — use the switch to pause it." />
         <div className="p-6">
           <SettingsForm
             editable={owner}
             botConfigured={botCheckConfigured()}
             values={{
               title: s.title,
-              startLocal: toCampaignLocalInput(s.startDate),
-              endLocal: toCampaignLocalInput(s.endDate),
               votingEnabled: s.votingEnabled,
-              resultsPublic: s.resultsPublic,
               heroIntro: s.heroIntro,
-              offerNote: s.offerNote,
               maxVotesPerDevicePerRestaurant: s.maxVotesPerDevicePerRestaurant,
               maxVotesPerNetworkPerHour: s.maxVotesPerNetworkPerHour,
               requireBotCheck: s.requireBotCheck,

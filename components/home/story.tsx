@@ -44,7 +44,7 @@ export function Story() {
               rel="noopener"
               className="group flex max-w-md items-end gap-6"
             >
-              <span className="relative block w-28 shrink-0 overflow-hidden bg-stone shadow-[0_24px_40px_-24px_rgba(30,21,17,0.45)] sm:w-32">
+              <span className="relative block w-28 shrink-0 overflow-hidden bg-stone shadow-[0_24px_40px_-24px_rgba(0,61,30,0.45)] sm:w-32">
                 <Image
                   src={poster}
                   alt="The official Taste, Click & Vote campaign poster"

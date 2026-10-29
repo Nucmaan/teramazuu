@@ -5,8 +5,7 @@ import { updateTag } from "next/cache";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { assertAdmin, hashPassword, verifyPassword } from "@/lib/auth";
-import { TAGS } from "@/lib/campaign";
-import { fromCampaignLocal } from "@/lib/time";
+import { DEFAULT_WINDOW, TAGS } from "@/lib/campaign";
 import { slugify } from "@/lib/utils";
 
 export type FormState = { ok?: boolean; message?: string; errors?: Record<string, string> };
@@ -136,46 +135,27 @@ export async function uploadRestaurantImage(id: string, _: FormState, formData: 
 
 // ── Campaign settings ─────────────────────────────────────────
 
-const localDateTime = z
-  .string()
-  .regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/, "Use the date picker.")
-  .transform((v, ctx) => {
-    const d = fromCampaignLocal(v);
-    if (!d) ctx.addIssue({ code: "custom", message: "Invalid date." });
-    return d ?? new Date(NaN);
-  });
-
-const settingsSchema = z
-  .object({
+const settingsSchema = z.object({
     title: z.string().trim().min(3).max(120),
-    startDate: localDateTime,
-    endDate: localDateTime,
     votingEnabled: z.boolean(),
-    resultsPublic: z.boolean(),
     heroIntro: z.string().trim().min(10).max(400),
-    offerNote: z.string().trim().max(600),
     maxVotesPerDevicePerRestaurant: z.coerce.number().int().min(0).max(50),
     maxVotesPerNetworkPerHour: z.coerce.number().int().min(0).max(10_000),
     requireBotCheck: z.boolean(),
-  })
-  .refine((v) => v.endDate > v.startDate, { path: ["endDate"], message: "Voting must close after it opens." });
+  });
 
 export async function saveSettings(_: FormState, formData: FormData): Promise<FormState> {
   await assertAdmin("OWNER");
   const parsed = settingsSchema.safeParse({
     title: formData.get("title"),
-    startDate: formData.get("startDate"),
-    endDate: formData.get("endDate"),
     votingEnabled: bool(formData.get("votingEnabled")),
-    resultsPublic: bool(formData.get("resultsPublic")),
     heroIntro: formData.get("heroIntro"),
-    offerNote: formData.get("offerNote") ?? "",
     maxVotesPerDevicePerRestaurant: formData.get("maxVotesPerDevicePerRestaurant"),
     maxVotesPerNetworkPerHour: formData.get("maxVotesPerNetworkPerHour"),
     requireBotCheck: bool(formData.get("requireBotCheck")),
   });
   if (!parsed.success) return { errors: fieldErrors(parsed.error) };
-  await db.campaignSettings.upsert({ where: { id: 1 }, update: parsed.data, create: { id: 1, ...parsed.data } });
+  await db.campaignSettings.upsert({ where: { id: 1 }, update: parsed.data, create: { id: 1, ...DEFAULT_WINDOW, ...parsed.data } });
   updateTag(TAGS.campaign);
   updateTag(TAGS.results);
   return { ok: true, message: "Campaign settings saved." };

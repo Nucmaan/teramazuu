@@ -26,7 +26,7 @@ export async function submitVote(raw: unknown, options: { preview?: boolean } = 
 
   try {
     const settings = await getCampaignSettings();
-    const status = getVotingStatus(settings, new Date());
+    const status = getVotingStatus(settings);
 
     // Preview votes are an explicit, authenticated testing mechanism; they are
     // flagged and excluded from every count and chart.
@@ -36,13 +36,7 @@ export async function submitVote(raw: unknown, options: { preview?: boolean } = 
       if (!admin) return { ok: false, code: "closed", message: "Preview voting requires an administrator session." };
       isTest = true;
     } else if (status !== "open") {
-      const message =
-        status === "upcoming"
-          ? "Voting has not opened yet. Please come back when the campaign begins."
-          : status === "closed"
-            ? "Voting has closed. Thank you for celebrating with us."
-            : "Voting is temporarily paused. Please try again shortly.";
-      return { ok: false, code: "closed", message };
+      return { ok: false, code: "closed", message: "Voting is temporarily paused. Please try again shortly." };
     }
 
     const address = await getClientAddress();

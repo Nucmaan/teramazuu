@@ -22,7 +22,7 @@ export default function VotePage({ searchParams }: PageProps<"/vote">) {
 }
 
 async function VoteGate({ searchParams }: { searchParams: PageProps<"/vote">["searchParams"] }) {
-  await connection(); // the open/closed decision depends on the current time
+  await connection();
   const sp = await searchParams;
   const slug = typeof sp.restaurant === "string" ? sp.restaurant : undefined;
   const wantsPreview = sp.preview === "1";
@@ -32,19 +32,12 @@ async function VoteGate({ searchParams }: { searchParams: PageProps<"/vote">["se
     getActiveRestaurants(),
     wantsPreview ? getAdmin() : Promise.resolve(null),
   ]);
-  const status = getVotingStatus(settings, new Date());
+  const status = getVotingStatus(settings);
   // Authenticated admins may rehearse the ballot at any time; those votes are flagged as tests.
   const preview = wantsPreview && admin !== null;
 
   if (status !== "open" && !preview) {
-    return (
-      <VotingState
-        status={status}
-        startDate={settings.startDate}
-        endDate={settings.endDate}
-        resultsPublic={settings.resultsPublic}
-      />
-    );
+    return <VotingState />;
   }
 
   return (

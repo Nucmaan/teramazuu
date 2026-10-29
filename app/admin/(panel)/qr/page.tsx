@@ -3,8 +3,6 @@ import QRCode from "qrcode";
 import { AlertTriangle } from "lucide-react";
 import { db } from "@/lib/db";
 import { requireAdmin } from "@/lib/auth";
-import { getCampaignSettings } from "@/lib/campaign";
-import { formatCampaignDate } from "@/lib/time";
 import { siteUrl } from "@/lib/utils";
 import { PageBody, PageHeader, PanelSkeleton } from "@/components/admin/page-header";
 import { PrintButton } from "@/components/admin/print-button";
@@ -32,10 +30,7 @@ async function QrSheet({ searchParams }: { searchParams: PageProps<"/admin/qr">[
   await requireAdmin();
   const sp = await searchParams;
   const only = typeof sp.restaurant === "string" ? sp.restaurant : undefined;
-  const [all, settings] = await Promise.all([
-    db.restaurant.findMany({ where: { isActive: true }, orderBy: [{ sortOrder: "asc" }, { name: "asc" }] }),
-    getCampaignSettings(),
-  ]);
+  const all = await db.restaurant.findMany({ where: { isActive: true }, orderBy: [{ sortOrder: "asc" }, { name: "asc" }] });
   const restaurants = only ? all.filter((r) => r.id === only) : all;
   const base = siteUrl();
   const isLocal = /localhost|127\.0\.0\.1/.test(base);
@@ -106,9 +101,6 @@ async function QrSheet({ searchParams }: { searchParams: PageProps<"/admin/qr">[
 
               <div className="w-full">
                 <p className="font-display text-[1.375rem] leading-tight text-[#30221c]">{c.name}</p>
-                <p className="mt-1 text-[0.6875rem] text-[#30221c]/60">
-                  {formatCampaignDate(settings.startDate, { year: undefined })} — {formatCampaignDate(settings.endDate)}
-                </p>
                 <p className="mt-2 text-[0.5625rem] uppercase tracking-[0.2em] text-[#30221c]/50">
                   Embassy of Italy · Mogadishu · #SCIM2026
                 </p>
