@@ -53,7 +53,7 @@ async function VoteGate({ searchParams }: { searchParams: PageProps<"/vote">["se
 function VoteSkeleton() {
   return (
     <div className="min-h-svh bg-ivory" aria-busy="true" aria-label="Loading the ballot">
-      <div className="h-16 bg-[#cd212a]" />
+      <div className="h-24 border-b-4 border-stone bg-white" />
       <div className="mx-auto max-w-3xl space-y-6 px-[var(--gutter)] py-14 lg:pt-16">
         <div className="h-3 w-24 animate-pulse bg-stone" />
         <div className="h-14 w-4/5 animate-pulse bg-stone" />

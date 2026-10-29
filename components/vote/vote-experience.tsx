@@ -1,18 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRef, useState, useTransition } from "react";
 import { Controller, useForm, useWatch, type FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowRight, Check, Loader2, X } from "lucide-react";
+import { ArrowRight, Check, Loader2 } from "lucide-react";
 import type { PublicRestaurant } from "@/lib/campaign";
 import { voteSchema, type VoteInput } from "@/lib/validation";
 import { submitVote } from "@/app/vote/actions";
 import { RatingScale } from "@/components/vote/rating-scale";
 import { Turnstile } from "@/components/vote/turnstile";
 import { VoteSuccess } from "@/components/vote/success";
+import { VoteHeader } from "@/components/vote/vote-header";
 import { SmartImage } from "@/components/site/smart-image";
 import { cn } from "@/lib/utils";
 import classicImage from "@/public/images/photo/classic.jpg";
@@ -113,20 +113,7 @@ export function VoteExperience({
 
   return (
     <div className="min-h-svh bg-ivory">
-      <header className="bg-[#cd212a] text-white">
-        <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-[var(--gutter)]">
-          <Link href="/" className="font-display text-xl tracking-[-0.01em]">
-            Taste<span className="text-[#c8f5d9]">,</span> Click <span className="italic text-[#c8f5d9]">&amp;</span> Vote
-          </Link>
-          <Link
-            href="/"
-            aria-label="Leave voting and return home"
-            className="-mr-2 grid size-11 place-items-center text-white/80 transition-colors hover:text-white"
-          >
-            <X className="size-5" />
-          </Link>
-        </div>
-      </header>
+      <VoteHeader />
 
       {/* ── The ballot, all on one page ───────────────────────────── */}
       <section className="relative mx-auto max-w-3xl" aria-label="Vote">
